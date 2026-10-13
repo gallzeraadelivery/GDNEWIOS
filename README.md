@@ -13,4 +13,12 @@ Origem do pacote: https://apt.amgios.com/debs/248.deb
 
 O conteúdo é pseudocódigo, não o código-fonte original nem um projeto diretamente compilável. Há trechos incompletos, indicados pelos avisos do Ghidra dentro dos arquivos.
 
-Este repositório contém somente a descompilação da variante rootless. Não inclui os binários originais, pacotes .deb, ferramentas ou relatórios de análise.
+A pasta rootless/ contém somente o pseudocódigo da variante rootless. Os binários originais, pacotes .deb e relatórios de análise não fazem parte dos arquivos versionados.
+
+## Tradução em português brasileiro
+
+Os recursos de tradução e as instruções para gerar um pacote de teste estão em [localization/README.md](localization/README.md). A versão ptbr5 traduz os 45 textos de localização e 89 textos distintos dos storyboards compilados, incluindo Configurações. Mensagens criadas pelo executável ainda precisam de verificação no iPhone.
+
+## Estado e descobertas
+
+Registro completo: [13/10/2026](docs/2026-10-13-status.md). Inclui tradução, branding corrigido v2, testes no iPhone e servidor novo. **A nova licença ainda não está integrada ao AMG.** Os testes de licenciamento são de um cliente independente.

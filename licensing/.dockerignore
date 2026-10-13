@@ -1,0 +1,9 @@
+*
+!Dockerfile
+!server.py
+!admin.html
+!admin.js
+!style.css
+
+!assets/
+!assets/*.png

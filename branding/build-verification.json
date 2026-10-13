@@ -1,0 +1,21 @@
+{
+  "package": "com.gdnewios.rootless",
+  "name": "gdnewios",
+  "version": "18.1.1+gdnewios2",
+  "runtime_bundle_id_preserved": "com.superdev.AMG",
+  "changed_resources": [
+    "var/jb/Applications/AMG.app/Base.lproj/Main.storyboardc/UINavigationController-peh-uj-LUi.nib/objects-11.0+.nib",
+    "var/jb/Applications/AMG.app/Base.lproj/Main.storyboardc/UINavigationController-peh-uj-LUi.nib/runtime.nib",
+    "var/jb/Applications/AMG.app/Info.plist",
+    "var/jb/Applications/AMG.app/zh-Hans.lproj/Main.strings",
+    "var/jb/Applications/AMG.app/pt-BR.lproj/Main.strings",
+    "var/jb/Applications/AMG.app/pt.lproj/Main.strings"
+  ],
+  "executable_sha256": {
+    "var/jb/Applications/AMG.app/AMG": "4c86af809167af9eb97ac0c0058844866beb651b231fee73d4ad91a1ad8fbded",
+    "var/jb/Applications/AMG.app/TG@wx_zyyy.dylib": "5aafa10bdc841ba0aca7abeeb4bbfff27beeb796adcb5068a157fa2b99c4c573",
+    "var/jb/Library/MobileSubstrate/DynamicLibraries/amg.dylib": "d94244a98c9a969960ebc27f27ff5ed9d4d704994cee00f8b4aca9e49ec05c63",
+    "var/jb/usr/SubstrateSafetyam.dylib": "0cdb88debd0441a7c6839ec6aa942be06ab8fab64f4aae5a9ef04183692f5469"
+  },
+  "sha256": "1bd2d976f440470a4b73f133e51ceb0315457d9d919c609c979df770f59a330f"
+}
