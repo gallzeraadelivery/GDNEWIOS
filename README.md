@@ -22,3 +22,5 @@ Os recursos de tradução e as instruções para gerar um pacote de teste estão
 ## Estado e descobertas
 
 Registro completo: [13/10/2026](docs/2026-10-13-status.md). Inclui tradução, branding corrigido v2, testes no iPhone e servidor novo. **A nova licença ainda não está integrada ao AMG.** Os testes de licenciamento são de um cliente independente.
+
+Tradução revisada em 14/10/2026: [guia de todos os campos e limites observados](localization/GUIA-DOS-CAMPOS.md). Pacote atual gdnewios3/ptbr6, com validação estrutural concluída e conferência visual no iPhone pendente.

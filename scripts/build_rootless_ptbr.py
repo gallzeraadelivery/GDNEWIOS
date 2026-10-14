@@ -5,7 +5,7 @@ from nib_ptbr import translate_nib, chinese_strings, fit_label_text
 
 EXPECTED_SHA = 'd07d1b04d7d2064a5ec1cc4eac4a6e09880f405524719ec3d156f433f51067a6'
 APP = 'var/jb/Applications/AMG.app/'
-VERSION = '18.1.1+ptbr5'
+VERSION = '18.1.1+ptbr6'
 
 def read_ar(blob):
     if blob[:8] != b'!<arch>\n': raise ValueError('Not a Debian ar archive')
@@ -113,7 +113,7 @@ def main():
             patched, changes = translate_nib(original_nib, translations)
             if chinese_strings(patched): raise ValueError('Untranslated storyboard text: ' + name)
             fitted_labels = 0
-            if 'zDg-re-XMD-view-7vF-qn-HBB.nib/' in name:
+            if changes:
                 patched, fitted_labels = fit_label_text(patched)
             if changes or fitted_labels:
                 replacements[name] = patched; nib_changes += len(changes); nib_files += 1

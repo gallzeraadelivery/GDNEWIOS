@@ -33,3 +33,7 @@ O arquivo pt-BR/nib-translations.json contém a tradução dos textos internos. 
 ## ptbr5 — rótulos completos na tela
 
 A versão 18.1.1+ptbr5 usa textos mais curtos em Configurações e habilita o ajuste automático de fonte em seus UILabels, com escala mínima de 0,65. Os frames, vínculos, ações e binários originais são preservados. O pacote foi validado estruturalmente; a conferência visual final é feita no iPhone após a instalação.
+
+## ptbr6 — significado das opções
+
+Revisão de todos os rótulos estáticos; usa “simular” para dados informados aos apps, explica identificadores e distingue respring de reboot. Ajuste automático de fonte aplicado aos UILabels dos NIBs traduzidos. Consulte [o guia dos campos](GUIA-DOS-CAMPOS.md) para efeitos confirmados, não confirmados e limitações. Não corrige a lógica original nem integra a nova licença.

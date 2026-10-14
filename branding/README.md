@@ -16,3 +16,5 @@ Pacote: `gdnewios-rootless-18.1.1-2.deb`, versão `18.1.1+gdnewios2`. Validado c
 Reprodução: `python scripts/build_gdnewios_brand.py --input /caminho/amg-rootless-18.1.1-ptbr5.deb --output /caminho/gdnewios-rootless-18.1.1-2.deb`.
 
 Correção: CFBundleName deve permanecer AMG; somente CFBundleDisplayName usa gdnewios. A versão 1 fechava em abertura nova e não deve ser reinstalada. A versão 2 corrigiu esse problema. Ver o registro diário para os limites dos testes anteriores.
+
+Atualização 14/10/2026: pacote gdnewios-rootless-18.1.1-3.deb (18.1.1+gdnewios3), baseado na tradução ptbr6. SHA-256 feaacf89c38d9a8e0b5f282539d0a5dbff914345c96b07ba5bd5bcf4c2d728dc. Mantém a correção de CFBundleName da versão 2. Conferência visual desta atualização no iPhone ainda pendente.

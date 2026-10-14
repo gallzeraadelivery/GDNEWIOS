@@ -1,0 +1,137 @@
+# Significado das opções — revisão de 14/10/2026
+
+## Como interpretar
+
+“Simular” significa alterar o valor que alguma API informa aos aplicativos. Não instala outro iOS, não transforma o hardware e não garante que todas as APIs informem o mesmo valor. O alcance depende do componente original e do app selecionado. Os rótulos descrevem a intenção da opção; não certificam que ela funciona em todos os casos.
+
+“Gerar nova identidade” corresponde ao antigo “Novo aparelho”. Pode combinar geração de dados com limpeza conforme as opções marcadas; não é uma simples troca do modelo. A abrangência exata das rotinas de limpeza ainda não foi validada.
+
+## Identificadores e hardware
+
+- IDFA: identificador de publicidade; mudança confirmada no probe.
+- IDFV: identificador de fornecedor de aplicativos; mudança confirmada no probe.
+- Token de notificações: DeviceToken relacionado a notificações push/APNS; efeito não testado, não garante novo registro APNS válido.
+- IDs de hardware: conjunto anunciado pelo original; não há confirmação de que todos os identificadores sejam substituídos.
+- Modelo de iPhone/iPad: modelo informado por APIs. Mudança confirmada em sysctl/uname; MobileGestalt continuou real. Não implica recursos físicos de outro modelo.
+- Versão do iOS: valor informado; sistema real permanece igual. Teste anterior encontrou UIDevice.systemVersion vazio com a opção ativa. Tradução não corrige essa falha.
+- Nome do aparelho: nome informado, não nome do perfil; UIDevice.name não mudou nos testes anteriores.
+- Brilho: valor informado de brilho; alteração observada no probe. Não afirma que a luminosidade física foi ajustada.
+- Bateria e volume: valores informados. Mudança de estado de bateria observada; não comprovados todos os valores agrupados.
+- Espaço e memória RAM: capacidade informada; não libera espaço nem adiciona memória. Sem alteração observada nas APIs medidas.
+- Horário de boot: instante de inicialização informado. kern.boottime mudou; uptime NSProcessInfo não. Não reinicia o sistema.
+
+## Rede e localização
+
+- MAC, IP local e dados Wi-Fi: valores informados nas APIs interceptadas; alterações observadas no probe. Não comprovam mudança do endereço real do roteador, da interface ou da conexão externa.
+- IP público: mostrar o IP de saída da conexão. Exibir não significa alterar.
+- Tipo de rede/operadora: dados informados; não contrata plano nem muda infraestrutura de conexão. Efeito não validado.
+- Identificação web: User-Agent informado a serviços web; URLSession não mudou no teste anterior. WebKit completo não testado.
+- Posição GPS/localização pelo IP/posição aleatória/deslocamento: modos de escolher ou ajustar a posição simulada. Não alteram o IP público e o efeito final ainda precisa de teste.
+- Ocultar VPN/proxy/jailbreak: tentativas de ocultar sinais detectáveis; não desliga VPN/proxy nem remove jailbreak, e não garante ocultação contra todos os detectores.
+- Modo avião ao gerar/trocar perfil: automatização associada à ação indicada; efeito não testado.
+
+## Limpeza, backup e ações
+
+- Keychain guarda credenciais e outros segredos, além de senhas. Apagar pode remover sessões/credenciais dentro do alcance da rotina original; abrangência não confirmada.
+- Cookies guardam estado/sessões web. Apagar pode desconectar contas.
+- Dados dos apps: limpeza dos dados dos aplicativos conforme seleção e rotina original; não é apenas alteração de identificadores.
+- Área de transferência: conteúdo de copiar/colar.
+- Rastros da App Store e limpeza intensiva: rotinas específicas originais; alcance exato não confirmado.
+- Apagar fotos e vídeos: ação de exclusão de mídia indicada pelo original; não foi executada para conferir tradução.
+- Backup completo, restauração e importação: rotinas originais para dados/perfis. Não equivalem a uma imagem completa recuperável de todo o iPhone; integridade de restauração não testada.
+- Reiniciar tela inicial: respring da interface; diferente de reboot completo.
+- Redefinir configurações: restaurar opções padrão do app; não representa restaurar iOS de fábrica.
+
+## Cobertura da revisão
+
+Todos os 89 textos estáticos chineses mapeados foram revisados, junto às 45 entradas Main.strings. Abaixo, a correspondência permite verificar cada tradução. Mensagens construídas no executável ofuscado podem permanecer fora dessa cobertura. A legibilidade final requer instalação e conferência visual no iPhone.
+
+- 设备信息: **Dados do aparelho**.
+- AMG数据导入与导出: **Importar/exportar perfis AMG**.
+- 一键新机: **Gerar nova identidade**.
+- 一键新机智能飞行模式: **Modo avião ao gerar perfil**.
+- 不伪装: **Não simular**.
+- 伪装 DeviceToken: **Simular token de notificações**.
+- 伪装 IDFA: **Simular ID de anúncios (IDFA)**.
+- 伪装 IDFV: **Simular ID do fornecedor (IDFV)**.
+- 伪装 MAC 地址: **Simular endereço MAC**.
+- 伪装 User-Agent: **Simular identificação web**.
+- 伪装 Wi-Fi 信息: **Simular nome e MAC do Wi-Fi**.
+- 伪装位置: **Simular posição GPS**.
+- 伪装信息配置: **Dados simulados para os apps**.
+- 伪装内网 IP 信息: **Simular IP da rede local**.
+- 伪装名称: **Simular nome do aparelho**.
+- 伪装屏幕亮度: **Simular brilho informado**.
+- 伪装机型为 iPad: **Simular modelo de iPad**.
+- 伪装电池和音量: **Simular bateria e volume**.
+- 伪装硬件 ID: **Simular IDs de hardware**.
+- 伪装磁盘和内存: **Simular espaço e memória RAM**.
+- 伪装系统启动时间: **Simular horário de boot**.
+- 伪装系统版本号: **Simular versão do iOS**.
+- 伪装设备机型: **Simular modelo de iPhone**.
+- 修复不能输入中文: **Corrigir digitação em chinês**.
+- 修复国行机Cydia不能联网: **Corrigir rede do Cydia (China)**.
+- 全息备份: **Backup completo dos apps**.
+- 关于: **Sobre**.
+- 其他数据导入: **Importar outros dados**.
+- 切换记录智能飞行模式: **Modo avião ao trocar perfil**.
+- 原始机器: **Dados originais do aparelho**.
+- 反越狱检测: **Ocultar sinais de jailbreak**.
+- 同时导入 Keychain: **Importar também o Keychain**.
+- 备份 Keychain: **Copiar senhas (Keychain)**.
+- 备份与还原配置: **Opções de backup e restauração**.
+- 备份记录: **Backups salvos**.
+- 实用工具: **Utilitários**.
+- 导入AMG数据: **Importar dados AMG**.
+- 导入AWZ数据: **Importar dados AWZ**.
+- 导入其他数据: **Importar outros dados**.
+- 导出AMG数据: **Exportar dados AMG**.
+- 屏蔽 HTTP 代理检测: **Ocultar uso de proxy HTTP**.
+- 屏蔽 VPN 检测: **Ocultar uso de VPN**.
+- 工具箱: **Ferramentas**.
+- 强效清除: **Limpeza intensiva**.
+- 快速设置: **Configuração rápida**.
+- 数据清除配置: **Dados a apagar dos apps**.
+- 旧版 Keychain 机制: **Usar mecanismo Keychain antigo**.
+- 显示外网IP: **Mostrar IP público da conexão**.
+- 智能偏移位置: **Deslocar posição simulada**.
+- 检查软件新版本: **Verificar atualizações**.
+- 注销(重启桌面): **Reiniciar tela inicial**.
+- 深度反越狱检测: **Ocultar jailbreak: avançado**.
+- 清除 AppStore 痕迹: **Apagar rastros da App Store**.
+- 清除 Cookies: **Apagar cookies de sessão**.
+- 清除 Keychain: **Apagar senhas (Keychain)**.
+- 清除剪贴版: **Apagar área de transferência**.
+- 清除应用数据: **Apagar dados dos apps**.
+- 瘦身(清除图片、视频): **Apagar fotos e vídeos**.
+- 目标应用: **Apps selecionados**.
+- 系统版本: **Versão do iOS**.
+- 网络类型: **Tipo de rede informado**.
+- 脚本和使用说明: **Scripts e instruções**.
+- 记录详情: **Detalhes do backup**.
+- 设备信息: **Dados do aparelho**.
+- 设备机型: **Modelo do aparelho**.
+- 设置: **Configurações**.
+- 路径: /var/mobile/Media/AMG/export: **Pasta: /var/mobile/Media/AMG/export**.
+- 路径: /var/mobile/Media/AMG/import: **Pasta: /var/mobile/Media/AMG/import**.
+- 路径: /var/mobile/iGrimace: **Pasta: /var/mobile/iGrimace**.
+- 路径: /var/mobile/importdata: **Pasta: /var/mobile/importdata**.
+- 运营商: **Operadora informada**.
+- 还原 Keychain: **Restaurar senhas (Keychain)**.
+- 还原到默认设置: **Redefinir configurações**.
+- 选择地理位置: **Escolher posição GPS**.
+- 选择机型: **Escolher modelo simulado**.
+- 选择版本: **Escolher versão do iOS**.
+- 选择目标应用: **Selecionar apps afetados**.
+- 选择系统版本: **Escolher versão do iOS**.
+- 选择系统版本号: **Escolher versão do iOS**.
+- 选择网络: **Escolher tipo de rede**.
+- 选择网络类型: **Escolher tipo de rede**.
+- 选择设备机型: **Escolher modelo simulado**.
+- 选择运营商: **Escolher operadora**.
+- 通过IP地址定位: **Usar localização pelo IP**.
+- 随机位置: **Sortear posição GPS**.
+- 随机型号选择: **Modelos permitidos no sorteio**.
+- 随机系统版本号: **Sortear versão do iOS**.
+- 随机设备参数: **Sortear dados do aparelho**.
+- 高级选项: **Opções avançadas**.

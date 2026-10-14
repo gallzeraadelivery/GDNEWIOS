@@ -1,0 +1,10 @@
+{
+  "package": "gdnewios-rootless-18.1.1-3.deb",
+  "version": "18.1.1+gdnewios3",
+  "sha256": "feaacf89c38d9a8e0b5f282539d0a5dbff914345c96b07ba5bd5bcf4c2d728dc",
+  "independently_parsed_nibs": 78,
+  "dpkg_deb_info_and_contents": true,
+  "original_executables_preserved": 4,
+  "device_visual_test": "pending",
+  "new_licensing_integration": false
+}
