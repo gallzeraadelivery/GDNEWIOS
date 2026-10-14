@@ -1,7 +1,7 @@
 {
   "package": "com.gdnewios.rootless",
   "name": "gdnewios",
-  "version": "18.1.1+gdnewios3",
+  "version": "18.1.1+gdnewios4",
   "runtime_bundle_id_preserved": "com.superdev.AMG",
   "changed_resources": [
     "var/jb/Applications/AMG.app/Base.lproj/Main.storyboardc/UINavigationController-peh-uj-LUi.nib/objects-11.0+.nib",
@@ -17,5 +17,5 @@
     "var/jb/Library/MobileSubstrate/DynamicLibraries/amg.dylib": "d94244a98c9a969960ebc27f27ff5ed9d4d704994cee00f8b4aca9e49ec05c63",
     "var/jb/usr/SubstrateSafetyam.dylib": "0cdb88debd0441a7c6839ec6aa942be06ab8fab64f4aae5a9ef04183692f5469"
   },
-  "sha256": "feaacf89c38d9a8e0b5f282539d0a5dbff914345c96b07ba5bd5bcf4c2d728dc"
+  "sha256": "5c3d06ba686f5c4fb43db27af26521157503e2edce978031122b78e79544f53d"
 }

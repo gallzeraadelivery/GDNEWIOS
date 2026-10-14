@@ -37,3 +37,7 @@ A versão 18.1.1+ptbr5 usa textos mais curtos em Configurações e habilita o aj
 ## ptbr6 — significado das opções
 
 Revisão de todos os rótulos estáticos; usa “simular” para dados informados aos apps, explica identificadores e distingue respring de reboot. Ajuste automático de fonte aplicado aos UILabels dos NIBs traduzidos. Consulte [o guia dos campos](GUIA-DOS-CAMPOS.md) para efeitos confirmados, não confirmados e limitações. Não corrige a lógica original nem integra a nova licença.
+
+## ptbr7 / gdnewios4 — espaço para nomes completos
+
+Configurações: linhas estáticas de 72 pontos, UILabels com 54 pontos de altura, quebra por palavras, número de linhas ilimitado dentro do espaço disponível e sem reduzir a fonte. Largura flexível para acompanhar a tela; interruptores com margens verticais ajustadas. As duas variantes do NIB foram atualizadas. Demais telas mantêm o ajuste anterior. Executáveis, ações e outlets preservados. 78 NIBs e formato Debian validados; aparência no dispositivo ainda pendente. Textos dinâmicos em chinês são uma pendência separada e não foram corrigidos por esta alteração de layout.

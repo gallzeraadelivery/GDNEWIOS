@@ -6,7 +6,7 @@ from build_rootless_ptbr import read_ar,write_ar
 from nib_ptbr import translate_nib
 ROOT=Path(__file__).resolve().parents[1]
 APP='var/jb/Applications/AMG.app/'
-VERSION='18.1.1+gdnewios3'
+VERSION='18.1.1+gdnewios4'
 def pack(files):
     stream=io.BytesIO()
     with tarfile.open(fileobj=stream,mode='w',format=tarfile.GNU_FORMAT) as archive:
@@ -17,7 +17,7 @@ def main():
     import argparse
     parser=argparse.ArgumentParser();parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
     original=args.input.read_bytes()
-    if hashlib.sha256(original).hexdigest()!='4a0a5ed80359285fc6d97e2bd8b6a90eb1261e1666ca48c8149160febaa74d01':raise ValueError('Use the verified ptbr6 package')
+    if hashlib.sha256(original).hexdigest()!='2a33765575d9a647bd16b51e5d179af3391edb5dafd639cd002c3150ed7d732b':raise ValueError('Use the verified ptbr7 package')
     members=read_ar(original);files=[];changed=[];binary_hashes={};nib_count=0
     with tarfile.open(fileobj=io.BytesIO(members['data.tar.gz'])) as archive:
         for member in archive.getmembers():

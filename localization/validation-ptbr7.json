@@ -1,0 +1,11 @@
+{
+  "version": "18.1.1+gdnewios4",
+  "sha256": "5c3d06ba686f5c4fb43db27af26521157503e2edce978031122b78e79544f53d",
+  "nibs_independently_validated": 78,
+  "settings_rows_72pt": 94,
+  "settings_labels_multiline": 94,
+  "label_height_pt": 54,
+  "dpkg_deb_info_and_contents": true,
+  "original_executables_preserved": 4,
+  "visual_test_on_device": "pending"
+}

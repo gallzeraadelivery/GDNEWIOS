@@ -123,3 +123,59 @@ def fit_label_text(data):
             for key,value in settings.items(): assert after[key]==value
         else: assert before==after
     return bytes(out),len(labels)
+
+
+def expand_settings_rows(data):
+    """Give static settings rows room for wrapping; retain outlets and actions."""
+    header,keys,objects,values=parse_values(data)
+    names=[];at=header[9]
+    for _ in range(header[8]):
+        size,at=varint(data,at);extras,at=varint(data,at);at+=4*extras
+        names.append(data[at:at+size].rstrip(b'\0').decode());at+=size
+    switches={i for i,(c,_,_) in enumerate(objects) if names[c]=='UISwitch'}
+    new_keys=list(keys);blocks=[v[3] for v in values];new_objects=list(objects);changed={}
+    def raw(key,kind,payload):
+        if key not in new_keys:new_keys.append(key)
+        return encode_varint(new_keys.index(key))+bytes([kind])+(encode_varint(len(payload)) if kind==8 else b'')+payload
+    for index,(cls,first,count) in enumerate(objects):
+        typ=names[cls];old={k:(t,p) for k,t,p,*_ in values[first:first+count]};patch={}
+        if typ in ('UILabel','UITableViewLabel'):
+            patch.update({'UINumberOfLines':(2,struct.pack('<i',0)),'UILineBreakMode':(0,b'\0'),'UIAdjustsFontSizeToFit':(5,b''),'UIMinimumScaleFactor':(7,struct.pack('<d',1.0)),'UIMinimumFontSize':(7,struct.pack('<d',17.0)),'UIAutoresizingMask':(0,bytes([42]))})
+            if 'UIBounds' in old:
+                kind,payload=old['UIBounds'];assert kind==8 and len(payload)==33 and payload[0]==7
+                x,y,w,h=struct.unpack('<4d',payload[1:]);neww=max(w,260.0);patch['UIBounds']=(8,b'\x07'+struct.pack('<4d',x,y,neww,54.0))
+                if 'UICenter' in old:
+                    kind,center=old['UICenter'];assert kind==8 and len(center)==17
+                    cx,cy=struct.unpack('<2d',center[1:]);patch['UICenter']=(8,b'\x07'+struct.pack('<2d',cx+(neww-w)/2,36.0))
+        elif typ=='UITableViewRow':patch['UITableRowHeight']=(6,struct.pack('<f',72.0))
+        elif typ=='UITableView':
+            patch['UIRowHeight']=(6,struct.pack('<f',72.0));patch['UIEstimatedRowHeight']=(6,struct.pack('<f',72.0))
+        elif typ in ('UITableViewCell','UITableViewCellContentView') and 'UIBounds' in old:
+            kind,payload=old['UIBounds'];assert kind==8 and len(payload)==33
+            x,y,w,h=struct.unpack('<4d',payload[1:]);patch['UIBounds']=(8,b'\x07'+struct.pack('<4d',x,y,w,72.0))
+            if typ=='UITableViewCellContentView' and 'UICenter' in old:
+                kind,center=old['UICenter'];cx,cy=struct.unpack('<2d',center[1:]);patch['UICenter']=(8,b'\x07'+struct.pack('<2d',cx,36.0))
+        elif typ=='NSLayoutConstraint':
+            refs=[struct.unpack('<I',old[k][1])[0] for k in ('NSFirstItem','NSSecondItem') if k in old and old[k][0]==10]
+            attr=old.get('NSFirstAttributeV2',old.get('NSFirstAttribute',(0,b'\0')))[1][0]
+            if any(i in switches for i in refs) and attr in (3,4):
+                for k in ('NSConstant','NSConstantV2'):
+                    if k in old:patch[k]=(7,struct.pack('<d',20.5))
+        if not patch:continue
+        selected=[];seen=set()
+        for key,kind,payload,original,*_ in values[first:first+count]:
+            if key in patch:kind,payload=patch[key];selected.append(raw(key,kind,payload));seen.add(key)
+            else:selected.append(original)
+        for key,(kind,payload) in patch.items():
+            if key not in seen:selected.append(raw(key,kind,payload))
+        new_objects[index]=(cls,len(blocks),len(selected));blocks.extend(selected);changed[index]=patch
+    object_blob=b''.join(encode_varint(c)+encode_varint(f)+encode_varint(n) for c,f,n in new_objects)
+    key_blob=b''.join(encode_varint(len(k.encode()))+k.encode() for k in new_keys);value_blob=b''.join(blocks)
+    prefix=data[:header[3]];ko=len(prefix)+len(object_blob);vo=ko+len(key_blob);co=vo+len(value_blob)
+    out=bytearray(prefix+object_blob+key_blob+value_blob+data[header[9]:]);h=list(header);h[4]=len(new_keys);h[5]=ko;h[6]=len(blocks);h[7]=vo;h[9]=co;struct.pack_into('<10I',out,10,*h)
+    nh,nk,no,nv=parse_values(out);assert bytes(out[nh[9]:])==data[header[9]:]
+    for i,(c,f,n) in enumerate(objects):
+        nc,nf,nn=no[i];assert nc==c
+        before={k:(t,p) for k,t,p,*_ in values[f:f+n]};after={k:(t,p) for k,t,p,*_ in nv[nf:nf+nn]}
+        assert after==dict(before,**changed.get(i,{})),(i,names[c])
+    return bytes(out),len(changed)
